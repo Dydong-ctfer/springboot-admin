@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--configuration core file-->
+<mapper namespace="com.dydong.springadmin.mapper.DepartmentMapper">
+
+    <!--查询所有部门-->
+    <select id="getDepartments" resultType="Department">
+        select * from springadmin.department
+    </select>
+
+    <select id="getDepartmentById" resultType="Department" parameterType="int">
+        select * from springadmin.department where pid = #{pid}
+    </select>
+
+</mapper>

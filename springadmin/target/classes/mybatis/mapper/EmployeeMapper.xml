@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--configuration core file-->
+<mapper namespace="com.dydong.springadmin.mapper.EmployeeMapper">
+
+    <resultMap id="EmpMap" type="Employee">
+        <id column="id" property="id"></id>
+        <id column="lastname" property="lastName"></id>
+        <id column="email" property="email"></id>
+        <id column="gender" property="gender"></id>
+        <association property="department" javaType="com.dydong.springadmin.pojo.Department">
+            <result property="pid" column="pid"></result>
+            <result property="departmentName" column="departmentName"></result>
+        </association>
+    </resultMap>
+
+    <select id="getEmployees" resultMap="EmpMap">
+        select emp.*,dept.* from employee emp,department dept where emp.did = dept.pid
+    </select>
+
+    <update id="save" parameterType="Employee">
+        insert into employee(lastName,email,gender,did)
+        values (#{lastName},#{email},#{gender},#{did})
+    </update>
+
+    <delete id="delete" parameterType="int">
+        delete from employee where id=#{id}
+    </delete>
+
+    <select id="getEmployeeById" parameterType="int" resultMap="EmpMap">
+        select * from employee where id=#{id}
+    </select>
+
+    <select id="edit" parameterType="Employee">
+        UPDATE employee SET lastName=#{lastName},email=#{email},gender=#{gender},did=#{did} WHERE id=#{id}
+    </select>
+
+</mapper>
