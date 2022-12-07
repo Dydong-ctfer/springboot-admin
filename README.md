@@ -1,2 +1,2 @@
 # springboot-admin
-Springboot学习资源~
+Springboot-Admin管理系统~
